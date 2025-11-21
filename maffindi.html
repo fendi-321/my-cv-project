@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhamad Affindi - Cloud & IT Service Delivery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #0ea5e9;
+            --text-light: #f8fafc;
+            --text-dark: #334155;
+            --text-gray: #64748b;
+            --bg-light: #f1f5f9;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: var(--white);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background: var(--primary);
+            color: var(--text-light);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, rgba(0,0,0,0) 70%);
+            z-index: 0;
+        }
+
+        .profile-section {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            padding: 4px;
+            background: var(--secondary);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .name-title h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .name-title p {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-item i {
+            color: var(--accent);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .contact-item a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        .section-header {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(14, 165, 233, 0.15);
+            color: var(--accent);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            background: var(--accent);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .cert-list ul, .soft-skills ul {
+            list-style: none;
+        }
+
+        .cert-list li, .soft-skills li {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .cert-list li::before, .soft-skills li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Certifications Dropdown */
+        .cert-accordions details {
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+        .cert-accordions summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            outline: none;
+        }
+        .cert-accordions details[open] summary {
+            color: var(--accent);
+        }
+        .cert-accordions ul {
+            margin-top: 8px;
+            padding-left: 16px;
+            list-style: none;
+        }
+        .cert-accordions li {
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 18px;
+            color: var(--text-light);
+        }
+        .cert-accordions li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Visitor Counter */
+        .visitor-counter {
+            margin-top: 30px;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid rgba(14, 165, 233, 0.3);
+        }
+
+        .visitor-counter p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #visitor-count {
+            color: var(--accent);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            padding: 50px;
+            background: var(--white);
+        }
+
+        .summary-box {
+            background: linear-gradient(to right, #f8fafc, #f1f5f9);
+            padding: 25px;
+            border-left: 5px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 40px;
+            font-style: italic;
+            color: var(--text-dark);
+        }
+
+        .main-section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .main-section-title i {
+            background: var(--accent);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: #e2e8f0;
+        }
+
+        .job-card {
+            position: relative;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            background: var(--white);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            z-index: 2;
+            transition: background 0.3s;
+        }
+
+        .job-card:hover::before {
+            background: var(--accent);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .company-name {
+            font-weight: 500;
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        .job-date {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            background: #f1f5f9;
+            padding: 2px 10px;
+            border-radius: 15px;
+        }
+
+        .job-details {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .job-details li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .job-details li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            top: 0;
+        }
+
+        .project-card:hover {
+            top: -5px;
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.1);
+            border-color: var(--accent);
+        }
+
+        .project-card h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .project-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            background: #e0f2fe;
+            color: #0369a1;
+            border-radius: 4px;
+            margin-top: 10px;
+            margin-right: 5px;
+        }
+
+        /* References */
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .ref-card {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--text-gray);
+        }
+        
+        .ref-name {
+            font-weight: 700;
+            color: var(--secondary);
+            display: block;
+        }
+        
+        .ref-contact {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stagger animations */
+        .job-card:nth-child(1) { animation-delay: 0.1s; }
+        .job-card:nth-child(2) { animation-delay: 0.2s; }
+        .job-card:nth-child(3) { animation-delay: 0.3s; }
+        .job-card:nth-child(4) { animation-delay: 0.4s; }
+        .job-card:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+                margin: 20px;
+                width: auto;
+            }
+            
+            .sidebar {
+                padding: 30px;
+                text-align: center;
+            }
+
+            .sidebar::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .contact-info {
+                align-items: center;
+            }
+
+            .skills-tags {
+                justify-content: center;
+            }
+            
+            .cert-list li, .soft-skills li {
+                text-align: left;
+                display: inline-block;
+                margin: 5px 10px;
+            }
+
+            .timeline::before {
+                left: 15px;
+            }
+
+            .timeline {
+                padding-left: 40px;
+            }
+            
+            .job-card::before {
+                left: -31px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Sidebar Section -->
+    <aside class="sidebar">
+        <div class="profile-section">
+            <img src="my pic.jpg" alt="Muhamad Affindi" class="profile-img">
+            <div class="name-title">
+                <h1>Muhamad Affindi</h1>
+                <p>IT Service Delivery<br>(Cloud Hybrid, Windows, Linux)</p>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Puchong, Selangor</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>(60) 172446156</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:maffindi@yahoo.com">maffindi@yahoo.com</a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-linkedin-in"></i>
+                <a href="https://www.linkedin.com/in/maffindi/" target="_blank">linkedin.com/in/maffindi</a>
+            </div>
+        </div>
+
+        <div class="education-section">
+            <h3 class="section-header">Education</h3>
+            <p><strong>Diploma in Computer Science / IT</strong></p>
+            <p style="font-size: 0.9rem; color: #cbd5e1;">University Putra Malaysia</p>
+            <p style="font-size: 0.8rem; color: var(--accent);">Oct 2001 - Oct 2005</p>
+        </div>
+
+        <div class="skills-section">
+            <h3 class="section-header">Technical Skills</h3>
+            <div class="skills-tags">
+                <span class="tag">Private Cloud Hybrid</span>
+                <span class="tag">AWS</span>
+                <span class="tag">Azure & DevOps</span>
+                <span class="tag">Terraform</span>
+                <span class="tag">VMware / Hyper-V</span>
+                <span class="tag">PowerShell</span>
+                <span class="tag">SQL Query</span>
+                <span class="tag">System Center</span>
+                <span class="tag">HP CSA/HPSA</span>
+            </div>
+        </div>
+
+        <div class="certs-section">
+            <h3 class="section-header">Certifications</h3>
+            <div class="cert-list">
+                <div class="cert-accordions">
+                    <details>
+                        <summary>AWS</summary>
+                        <ul>
+                            <li>Cloud Practitioner</li>
+                            <li>SysOps Associate</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Microsoft</summary>
+                        <ul>
+                            <li>MCP 2000 / MCSA / MCSE</li>
+                            <li>Azure Fundamental</li>
+                            <li>Azure Administrator Associate</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>ITIL</summary>
+                        <ul>
+                            <li>Foundation V2 / V3</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Hashicorp</summary>
+                        <ul>
+                            <li>Terraform Associate</li>
+                        </ul>
+                    </details>
+                </div>
+                <ul class="other-certs">
+                    <li>PMP Certification</li>
+                    <li>ISC2</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Visitor Counter Section -->
+        <div class="visitor-counter">
+            <p>Visitor Count</p>
+            <h3 id="visitor-count">Loading...</h3>
+        </div>
+    </aside>
+
+    <!-- Main Content Section -->
+    <main class="main-content">
+        <section class="summary-box">
+            <p>With 13 years of working experiences in IT environment and 3 years in Cloud Operation. A key team player with relevant aptitude and positive attitude. Proactively seeking to upskill and upgrade in Information Technology field. To involve in new projects to broaden skills, knowledge and make positive contributions.</p>
+        </section>
+
+        <section>
+            <h2 class="main-section-title"><i class="fas fa-briefcase"></i> Work History</h2>
+            
+            <div class="timeline">
+                <!-- Job 1 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Cloud Reliability Analyst</div>
+                            <div class="company-name">Epicor (M) Sdn Bhd</div>
+                        </div>
+                        <div class="job-date">Apr 2024 - Present</div>
+                    </div>
+                    <ul class="job-details">
+                        <li>Creation and maintenance of VMs for new and existing customers.</li>
+                        <li>Monitoring performance metrics using App Insights, App Dynamics, and SolarWinds.</li>
+                        <li>Ongoing performance tweaks to SQL configurations (refresh DB, CPU/Memory utilization).</li>
+                        <li>Building and maintaining Azure DevOps Pipelines.</li>
+                        <li>Utilizing PowerShell scripts and ARM templates; familiar with K9s containerization.</li>
+                        <li>Using ServiceNow for daily operations.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Assistant Manager IT</div>
+                            <div class="company-name">KAF Digital Bank</div>
+                        </div>
+                        <div class="job-date">Oct 2023 - Apr 2024</div>
+                    </div>
+                    <ul class="job-details">
+                        <li>Lead managed services team to tackle Infra and application level disruptions (e-KYC, Core Banking).</li>
+                        <li>Ensure system/network compliance with regulatory requirements.</li>
+                        <li>Commission and maintain operating environment for Digital banking applications.</li>
+                        <li>Prepare KPIs for system and application performance.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Project Coordinator</div>
+                            <div class="company-name">Noventiq Solution</div>
+                        </div>
+                        <div class="job-date">Jan 2023 - Sept 2023</div>
+                    </div>
+                    <ul class="job-details">
+                        <li>Managing small size projects remotely, ensuring timeline and customer satisfaction.</li>
+                        <li>Project Risk Management (Analyze risk/Costs impact/Resources Risk).</li>
+                        <li>Providing overall project updates to management (Bi-weekly/Monthly).</li>
+                    </ul>
+                </div>
+
+                <!-- Job 4 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">ITIO Cloud Service Delivery</div>
+                            <div class="company-name">DXC Technology</div>
+                        </div>
+                        <div class="job-date">Jan 2019 - Nov 2022</div>
+                    </div>
+                    <ul class="job-details">
+                        <li>Managed nearly 10k cloud hybrid servers (VMware and AWS) for internal companies.</li>
+                        <li>Monitoring resources and platforms such as AWS EC2 and ELB.</li>
+                        <li>Integrate private cloud tools (HP CSA, HP OO, HPSA) to monitor server deliverance.</li>
+                        <li>Handling incidents, changes, and requests using ServiceNow.</li>
+                        <li>Experiencing SQL query, JSON scripting and VMware PowerCLI.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 5 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Senior IT Exec</div>
+                            <div class="company-name">Eastern & Oriental Berhad</div>
+                        </div>
+                        <div class="job-date">Feb 2018 - Jan 2019</div>
+                    </div>
+                    <ul class="job-details">
+                        <li>Maintained overall infrastructure, network security, virtualization, and IT risk.</li>
+                        <li>Implemented projects relating to infrastructure and service delivery.</li>
+                        <li>Work closely with vendors and stakeholders to ensure project delivery.</li>
+                    </ul>
+                </div>
+                
+                <!-- Job 6 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">IT Consultant II</div>
+                            <div class="company-name">HPE Multimedia</div>
+                        </div>
+                        <div class="job-date">Mar 2013 - Oct 2017</div>
+                    </div>
+                    <ul class="job-details">
+                        <li>Provide Microsoft Server and VMware support for HP Enterprise Services World Wide.</li>
+                        <li>Experience with trouble ticketing and request management tools.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 7 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Windows Specialist II</div>
+                            <div class="company-name">DKSH (M) Sdn Bhd</div>
+                        </div>
+                        <div class="job-date">May 2012 - Mar 2013</div>
+                    </div>
+                    <ul class="job-details">
+                        <li>Knowledge of, and experience supporting, Microsoft Windows Server 2003/2008.</li>
+                        <li>Understanding of networking, system management, VMware, Hyper-V Windows Server operating system.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 8 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">System Engineer</div>
+                            <div class="company-name">Arvato (M) Sdn Bhd</div>
+                        </div>
+                        <div class="job-date">Sept 2011 - May 2012</div>
+                    </div>
+                    <ul class="job-details">
+                        <li>Commission and maintain the operating environment of all Windows (Servers & PCs) and VMWare-based systems, including global applications.</li>
+                        <li>Perform day-to-day operations, administration, tuning and capacity management of Windows/VMWare systems to ensure good performance.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 9 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Infra Mgmt Analyst</div>
+                            <div class="company-name">ACS (M) Sdn Bhd</div>
+                        </div>
+                        <div class="job-date">Feb 2009 - Sept 2011</div>
+                    </div>
+                    <ul class="job-details">
+                        <li>Assist in any IT infrastructure Research & Development projects assigned from time to time. Involve in IT Asset Management.</li>
+                        <li>Work closely with IT Manager and project team to provide necessary support and solution.</li>
+                        <li>Provide IT support (including setup and maintenance of PC hardware, software application (SAP, MS Dynamics 2011), server and network-related issues).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="main-section-title"><i class="fas fa-project-diagram"></i> Key Projects</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h4>KAF Digital Bank - DR & Validation</h4>
+                    <p>Disaster Recovery Readiness, Health Check Phase 2/3, Network validation, and Core Banking SIT & UAT.</p>
+                    <span class="project-tag">Disaster Recovery</span>
+                    <span class="project-tag">Banking</span>
+                </div>
+
+                <div class="project-card">
+                    <h4>HGB - Google to O365 Migration</h4>
+                    <p>Managed scheduling from kickoff to UAT, admin training, solution architect review, and validation.</p>
+                    <span class="project-tag">Migration</span>
+                    <span class="project-tag">O365</span>
+                </div>
+
+                <div class="project-card">
+                    <h4>BSN - DR Activity</h4>
+                    <p>Involved with vendor sign-off (VSTEC, BlueFortress) and scheduling with Platform, DB, and App teams.</p>
+                    <span class="project-tag">Vendor Mgmt</span>
+                    <span class="project-tag">Coordination</span>
+                </div>
+
+                <div class="project-card">
+                    <h4>E&O - Migrate to HCI (VSAN)</h4>
+                    <p>Migrated physical old servers to HCI (HPE Gen9), P2V involvement, Network Trunking, and UAT Validation.</p>
+                    <span class="project-tag">Virtualization</span>
+                    <span class="project-tag">HPE</span>
+                </div>
+            </div>
+        </section>
+
+
+        <section style="margin-top: 40px;">
+            <h2 class="main-section-title"><i class="fas fa-users"></i> References</h2>
+            <div class="references-grid">
+                <div class="ref-card">
+                    <span class="ref-name">Zain Hassan</span>
+                    <span class="ref-contact">mzainh@gmail.com</span>
+                    <span class="ref-contact">+6(012)2952508</span>
+                </div>
+                <div class="ref-card">
+                    <span class="ref-name">David Khoo</span>
+                    <span class="ref-contact">david.khoo-chang-ching@dxc.com</span>
+                    <span class="ref-contact">+60 (12) 2833605</span>
+                </div>
+                <div class="ref-card">
+                    <span class="ref-name">Ahmed Zaki Shuhaimi</span>
+                    <span class="ref-contact">+6(012) 3233985</span>
+                </div>
+                <div class="ref-card">
+                    <span class="ref-name">Ahmad Shahir Suden</span>
+                    <span class="ref-contact">shahir@kaf.com.my</span>
+                    <span class="ref-contact">+6(019)2357843</span>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+    // Function to update visitor count
+    async function updateVisitorCount() {
+        try {
+            const apiUrl = 'https://t624g3agqumqbv6k4kvrw26mtm0qezsb.lambda-url.ap-southeast-1.on.aws/'; 
+            
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            document.getElementById('visitor-count').innerText = data.count;
+        } catch (error) {
+            console.error('Error fetching visitor count:', error);
+            document.getElementById('visitor-count').innerText = 'Error';
+        }
+    }
+
+    // Call the function when page loads
+    document.addEventListener('DOMContentLoaded', updateVisitorCount);
+</script>
+</body>
+</html>

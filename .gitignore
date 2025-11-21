@@ -1,0 +1,18 @@
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Archives
+*.zip
+
+# Node (if any future tooling is added)
+node_modules/
+
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+
+# Python
+__pycache__/
